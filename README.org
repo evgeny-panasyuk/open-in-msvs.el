@@ -1,2 +1,2 @@
-* open-in-msvs
-Emacs package which provides function to open current file:line:column in Microsoft Visual Studio
+* open-in-msvs.el
+Emacs package which provides function =open-in-msvs= to open current file:line:column in Microsoft Visual Studio
