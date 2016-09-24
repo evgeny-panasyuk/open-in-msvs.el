@@ -42,14 +42,14 @@
 ;;; Code:
 
 
-(defvar open-in-msvs/path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
+(defvar open-in-msvs--path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
   
 (defun open-in-msvs ()
   "Opens current file:line:column within active instance of Visual Studio or start new one."
   (interactive)
   (call-process-shell-command
    (format "\"%s\" \"%s\" %d %d"
-           open-in-msvs/path-to-vbs
+           open-in-msvs--path-to-vbs
            (buffer-file-name)
            (line-number-at-pos)
            (current-column))
