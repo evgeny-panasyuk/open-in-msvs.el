@@ -39,11 +39,15 @@
 ;; Bind the following command:
 ;; open-in-msvs
 
+
 ;;; Code:
 
 
 (defvar open-in-msvs--path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
-  
+
+
+;; Main function
+;;;###autoload
 (defun open-in-msvs ()
   "Opens current file:line:column within active instance of Visual Studio or start new one."
   (interactive)
