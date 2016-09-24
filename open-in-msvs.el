@@ -52,9 +52,9 @@
   "Opens current file:line:column within active instance of Visual Studio or start new one."
   (interactive)
   (call-process-shell-command
-   (format "\"%s\" \"%s\" %d %d"
-           open-in-msvs--path-to-vbs
-           (buffer-file-name)
+   (format "%s %s %d %d"
+           (shell-quote-argument open-in-msvs--path-to-vbs)
+           (shell-quote-argument (buffer-file-name))
            (line-number-at-pos)
            (current-column))
    nil nil nil))
