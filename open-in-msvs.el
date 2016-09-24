@@ -41,19 +41,20 @@
 
 ;;; Code:
 
-(when (eq system-type 'windows-nt)
-  (defvar open-in-msvs/path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
+
+(defvar open-in-msvs/path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
   
-  (defun open-in-msvs ()
-    "Opens current file:line:column within active instance of Visual Studio or starts new one."
-    (interactive)
-    (call-process-shell-command
-     (format "\"%s\" \"%s\" %d %d"
-             open-in-msvs/path-to-vbs
-             (buffer-file-name)
-             (line-number-at-pos)
-             (current-column))
-     nil nil nil)))
+(defun open-in-msvs ()
+  "Opens current file:line:column within active instance of Visual Studio or starts new one."
+  (interactive)
+  (call-process-shell-command
+   (format "\"%s\" \"%s\" %d %d"
+           open-in-msvs/path-to-vbs
+           (buffer-file-name)
+           (line-number-at-pos)
+           (current-column))
+   nil nil nil))
+
 
 (provide 'open-in-msvs)
 ;;; open-in-msvs.el ends here
