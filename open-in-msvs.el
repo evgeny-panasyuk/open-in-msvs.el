@@ -1,4 +1,4 @@
-;;; open-in-msvs.el --- Provides function to open current file:line:column in Microsoft Visual Studio  -*- lexical-binding: t; -*-
+;;; open-in-msvs.el --- Open current file:line:column in Microsoft Visual Studio  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016 Evgeny Panasyuk
 
