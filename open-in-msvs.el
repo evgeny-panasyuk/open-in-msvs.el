@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2016 Evgeny Panasyuk
 
-;; Author: Evgeny Panasyuk <E?????[dot]P???????[at]gmail.???>
+;; Author: Evgeny Panasyuk
 ;; URL: https://github.com/evgeny-panasyuk/open-in-msvs
 ;; Version: 0.1
 ;; Keywords: convenience, usability, integration, Visual Studio, MSVS, IDE
