@@ -1,2 +1,3 @@
+[[https://melpa.org/#/open-in-msvs][file:https://melpa.org/packages/open-in-msvs-badge.svg]]
 * open-in-msvs.el
 Emacs package which provides function =open-in-msvs= to open current file:line:column in Microsoft Visual Studio
