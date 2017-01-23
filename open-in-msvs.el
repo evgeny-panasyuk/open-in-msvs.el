@@ -4,7 +4,7 @@
 
 ;; Author: Evgeny Panasyuk
 ;; URL: https://github.com/evgeny-panasyuk/open-in-msvs
-;; Version: 0.1
+;; Version: 0.2
 ;; Keywords: convenience, usability, integration, Visual Studio, MSVS, IDE
 
 ;;; License:
@@ -51,13 +51,15 @@
 (defun open-in-msvs ()
   "Opens current file:line:column within active instance of Visual Studio or start new one."
   (interactive)
-  (call-process-shell-command
-   (format "%s %s %d %d"
-           (shell-quote-argument open-in-msvs--path-to-vbs)
-           (shell-quote-argument (buffer-file-name))
-           (line-number-at-pos)
-           (current-column))
-   nil nil nil))
+  (save-restriction
+    (widen)
+    (call-process-shell-command
+     (format "%s %s %d %d"
+             (shell-quote-argument open-in-msvs--path-to-vbs)
+             (shell-quote-argument (buffer-file-name))
+             (line-number-at-pos)
+             (current-column))
+     nil nil nil)))
 
 
 (provide 'open-in-msvs)
