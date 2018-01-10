@@ -42,8 +42,20 @@
 
 ;;; Code:
 
+(require 's)
 
-(defvar open-in-msvs--path-to-vbs (concat (file-name-directory load-file-name) "open-in-msvs.vbs"))
+(defun open-in-msvs--cygpath-to-windows (filename)
+  "Convert filename to a Windows path with cygpath."
+  (s-trim
+   (shell-command-to-string
+    (format "cygpath --windows %s"
+            (shell-quote-argument filename)))))
+
+(defvar open-in-msvs--path-to-vbs (concat (file-name-directory
+                                           (or load-file-name
+                                               (buffer-file-name))) "open-in-msvs.vbs"))
+(when (eq system-type 'cygwin)
+  (setq open-in-msvs--path-to-vbs (open-in-msvs--cygpath-to-windows open-in-msvs--path-to-vbs)))
 
 
 ;; Main function
@@ -53,13 +65,14 @@
   (interactive)
   (save-restriction
     (widen)
-    (call-process-shell-command
-     (format "%s %s %d %d"
-             (shell-quote-argument open-in-msvs--path-to-vbs)
-             (shell-quote-argument (buffer-file-name))
-             (line-number-at-pos)
-             (current-column))
-     nil nil nil)))
+    (let ((filename (if (eq system-type 'cygwin)
+                        (open-in-msvs--cygpath-to-windows (buffer-file-name))
+                      (buffer-file-name))))
+      (call-process "cmd.exe"
+                    nil nil nil
+                    "/C" 
+                    open-in-msvs--path-to-vbs filename
+                    (number-to-string (line-number-at-pos)) (number-to-string (current-column))))))
 
 
 (provide 'open-in-msvs)
