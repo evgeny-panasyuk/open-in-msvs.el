@@ -51,11 +51,13 @@
     (format "cygpath --windows %s"
             (shell-quote-argument filename)))))
 
-(defvar open-in-msvs--path-to-vbs (concat (file-name-directory
-                                           (or load-file-name
-                                               (buffer-file-name))) "open-in-msvs.vbs"))
-(when (eq system-type 'cygwin)
-  (setq open-in-msvs--path-to-vbs (open-in-msvs--cygpath-to-windows open-in-msvs--path-to-vbs)))
+(defvar open-in-msvs--path-to-vbs
+  (let ((path (concat (file-name-directory
+                       (or load-file-name
+                           (buffer-file-name))) "open-in-msvs.vbs")))
+    (if (eq system-type 'cygwin)
+        (open-in-msvs--cygpath-to-windows path)
+      path)))
 
 
 ;; Main function
